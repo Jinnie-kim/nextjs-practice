@@ -6,8 +6,16 @@ import { useRouter } from 'next/router';
 export default function Home({ results }) {
   const router = useRouter();
 
-  const onClick = (id) => {
-    router.push(`/movies/${id}`); // route 하는 방법 2.router
+  const onClick = (id, title) => {
+    router.push(
+      {
+        pathname: `/movies/${id}`,
+        query: {
+          title,
+        },
+      },
+      `/movies/${id}`
+    );
   };
 
   return (
@@ -15,7 +23,7 @@ export default function Home({ results }) {
       <Seo title="Home" />
       {results?.map((movie) => {
         return (
-          <div onClick={() => onClick(movie.id)} className="movie" key={movie.id}>
+          <div onClick={() => onClick(movie.id, movie.original_title)} className="movie" key={movie.id}>
             <img src={`https://image.tmdb.org/t/p/w500/${movie.poster_path}`} />
             <h4>
               {/* route 하는 방법 1.Link */}
