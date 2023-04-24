@@ -7,15 +7,7 @@ export default function Home({ results }) {
   const router = useRouter();
 
   const onClick = (id, title) => {
-    router.push(
-      {
-        pathname: `/movies/${id}`,
-        query: {
-          title,
-        },
-      },
-      `/movies/${id}`
-    );
+    router.push(`/movies/${title}/${id}`);
   };
 
   return (
@@ -27,7 +19,7 @@ export default function Home({ results }) {
             <img src={`https://image.tmdb.org/t/p/w500/${movie.poster_path}`} />
             <h4>
               {/* route 하는 방법 1.Link */}
-              <Link href={`/movies/${movie.id}`} legacyBehavior>
+              <Link href={`/movies/${movie.original_title}/${movie.id}`} legacyBehavior>
                 {movie.original_title}
               </Link>
             </h4>
